@@ -26,11 +26,11 @@ const Register = () => {
     }
 
     return (
-        <>
+        <div className='w-50 mx-auto mt-5'>
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Your name</Form.Label>
+                    <Form.Label>Full name</Form.Label>
                     <Form.Control name='name' type="text" placeholder="Enter name" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -50,7 +50,8 @@ const Register = () => {
                     Register
                 </Button>
             </Form>
-            <p className='mt-3'><small>Already have an account? Please<Link to='/login'>Login</Link></small></p></>
+            <p className='mt-3'><small>Already have an account? Please<Link to='/login'>Login</Link></small></p>
+        </div>
     );
 };
 

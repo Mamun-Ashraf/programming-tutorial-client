@@ -47,7 +47,7 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className='w-50 mx-auto mt-5'>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -69,7 +69,7 @@ const Login = () => {
                 <span>OR</span>
                 <Button onClick={handleGithubSignIn} className='my-3' variant="outline-dark"><FaGithub className='me-2'></FaGithub>Login with Github</Button>
             </ButtonGroup>
-        </>
+        </div>
     );
 };
 

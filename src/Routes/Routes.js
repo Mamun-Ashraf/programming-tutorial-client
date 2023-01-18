@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import CourseDetails from '../Pages/CourseDetails';
-import Home from '../Pages/Home';
+import Blog from '../Pages/Blog';
+import CourseDetails from '../layout/Courses/CourseDetails';
 import Main from '../layout/Main';
-import Blog from "../Pages/Blog";
-import Login from '../Pages/Login';
-import Register from '../Pages/Register';
+import Courses from "../layout/Courses/Courses";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 export const router = createBrowserRouter([
     {
@@ -12,12 +12,14 @@ export const router = createBrowserRouter([
         element: <Main></Main>,
         children: [
             {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
                 path: '/courses',
-                element: <CourseDetails></CourseDetails>
+                element: <Courses></Courses>,
+                children: [
+                    {
+                        path: '/courses/:id',
+                        element: <CourseDetails></CourseDetails>
+                    }
+                ]
             },
             {
                 path: '/blog',

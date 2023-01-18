@@ -39,27 +39,23 @@ const Header = () => {
                         <Link className='ms-5 text-decoration-none text-dark' to='/blog'>Blog</Link>
                     </Nav>
                     <Nav>
-                        <>
-                            {
-                                user?.uid ?
-                                    <>
-                                        <span>{user?.displayName}</span>
-                                        <Button onClick={handleLogOut} className='ms-2'>Logout</Button>
-                                    </>
-                                    :
-                                    <>
-                                        <Link className='me-3 text-decoration-none text-dark' to='/login'>Login</Link>
-                                        <Link className='me-3 text-decoration-none text-dark' to='/register'>Register</Link>
-                                    </>
-                            }
-                        </>
-                        {user?.photoURL ?
-                            <Image
-                                style={{ height: '30px' }} roundedCircle
-                                src={user.photoURL}>
-                            </Image>
-                            :
-                            <FaUser></FaUser>
+                        {
+                            user?.uid ?
+                                <Button onClick={handleLogOut} className='ms-2'>Logout</Button>
+                                :
+                                <>
+                                    <Link className='me-3 text-decoration-none text-dark' to='/login'>Login</Link>
+                                    <Link className='me-3 text-decoration-none text-dark' to='/register'>Register</Link>
+                                </>
+                        }
+                        {
+                            user?.photoURL ?
+                                <Image
+                                    style={{ height: '30px' }} roundedCircle
+                                    src={user.photoURL}>
+                                </Image>
+                                :
+                                <FaUser></FaUser>
                         }
                     </Nav>
                 </Navbar.Collapse>
