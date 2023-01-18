@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthProvider/AuthProvider';
-import { Button, Form } from 'react-bootstrap';
+import { Button, ButtonGroup, Form } from 'react-bootstrap';
+import { FaGoogle, FaGithub } from
+    "react-icons/fa";
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -22,21 +28,48 @@ const Login = () => {
             .catch(e => { console.error(e) })
     }
 
-    return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control name='email' type="email" placeholder="Enter email" required />
-            </Form.Group>
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control name='password' type="password" placeholder="Password" required />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Login
-            </Button>
-        </Form>
+    const handleGithubSignIn = () => {
+        providerLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
+    return (
+        <>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control name='email' type="email" placeholder="Enter email" required />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control name='password' type="password" placeholder="Password" required />
+                </Form.Group>
+                <Button className='px-5' variant="primary" type="submit">
+                    Login
+                </Button>
+            </Form>
+            <p className='mt-3'><small>New to this site? Please<Link to='/register'>Register</Link></small></p>
+            <ButtonGroup vertical>
+                <span>OR</span>
+                <Button onClick={handleGoogleSignIn} className='my-3' variant="outline-primary"><FaGoogle className='me-2'></FaGoogle>Login with Google</Button>
+                <span>OR</span>
+                <Button onClick={handleGithubSignIn} className='my-3' variant="outline-dark"><FaGithub className='me-2'></FaGithub>Login with Github</Button>
+            </ButtonGroup>
+        </>
     );
 };
 
