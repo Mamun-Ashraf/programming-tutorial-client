@@ -7,16 +7,13 @@ const CourseDetailsCard = ({ course }) => {
 
     const { _id, course_name, course_heading, course_details, photo } = course;
 
-    const handleCheckOut = () => {
-        console.log('check out page')
-    }
     return (
-        <Card className='my-5'>
+        <Card className='mt-5 w-75 mx-auto'>
             <Card.Header className='d-flex justify-content-between align-items-center'>
                 <h4>{course_name}</h4>
                 <FaFileDownload></FaFileDownload>
             </Card.Header>
-            <Card.Body>
+            <Card.Body className='mx-auto'>
                 <Card.Title>{course_heading}</Card.Title>
                 <Card.Img variant="top" src={photo} />
                 <Card.Text>
@@ -27,8 +24,9 @@ const CourseDetailsCard = ({ course }) => {
                             course_details
                     }
                 </Card.Text>
+                <Link to='/checkout'><Button>Get Premium Access</Button></Link>
             </Card.Body>
-            <Button onClick={handleCheckOut} className='me-3'>Get Premium Access</Button>
+
         </Card>
     );
 };
