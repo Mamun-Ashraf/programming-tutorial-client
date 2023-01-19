@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Contexts/AuthProvider/AuthProvider';
 import { Button, ButtonGroup, Form } from 'react-bootstrap';
 import { FaGoogle, FaGithub } from
@@ -7,6 +7,8 @@ import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+    const [error, setError] = useState('');
 
     const { signIn, providerLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
@@ -23,9 +25,13 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                setError('');
                 form.reset();
             })
-            .catch(e => { console.error(e) })
+            .catch(e => {
+                console.error(e);
+                setError(e.message)
+            })
     }
 
     const handleGoogleSignIn = () => {
@@ -61,6 +67,9 @@ const Login = () => {
                 <Button className='px-5' variant="primary" type="submit">
                     Login
                 </Button>
+                <Form.Text className="text-danger">
+                    {error}
+                </Form.Text>
             </Form>
             <p className='mt-3'><small>New to this site? Please<Link to='/register'>Register</Link></small></p>
             <ButtonGroup vertical>
