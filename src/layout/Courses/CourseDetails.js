@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from 'react';
-// import { useLoaderData } from 'react-router-dom';
-import CourseDetailsCard from './CourseDetailsCard';
+import React from 'react';
+import { Button, Card } from 'react-bootstrap';
+import { FaFileDownload } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-const CourseDetails = () => {
+const CourseDetails = ({ course }) => {
 
-    // const courses = useLoaderData();
-    const [courses, setCourses] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:5000/courses')
-            .then(res => res.json())
-            .then(data => setCourses(data))
-    }, [])
+    const { _id, course_name, course_heading, course_details, photo } = course;
 
     return (
-        <div className='mt-5'>
-            <h2>This is course details:{courses.length}</h2>
-            {
-                courses.map(course => <CourseDetailsCard
-                    key={course._id}
-                    course={course}
-                ></CourseDetailsCard>)
-            }
-        </div>
+        <Card className='mt-5 w-75 mx-auto'>
+            <Card.Header className='d-flex justify-content-between align-items-center'>
+                <h4>{course_name}</h4>
+                <FaFileDownload></FaFileDownload>
+            </Card.Header>
+            <Card.Body className='mx-auto'>
+                <Card.Title>{course_heading}</Card.Title>
+                <Card.Img variant="top" src={photo} />
+                <Card.Text>
+                    {
+                        course_details.length > 250 ?
+                            <>{course_details.slice(0, 250) + '...'}<Link to={`/courses/${_id}`}>Read More</Link></>
+                            :
+                            course_details
+                    }
+                </Card.Text>
+                <Link to='/checkout'><Button>Get Premium Access</Button></Link>
+            </Card.Body>
+
+        </Card>
     );
 };
 

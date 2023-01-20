@@ -22,8 +22,8 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setError('');
                 form.reset();
+                setError('');
             })
             .catch(e => {
                 console.error(e);

@@ -24,7 +24,7 @@ const Header = () => {
                 <Navbar.Brand href="#home">
                     <img
                         alt=""
-                        src='/src/assets/logos/web-dev-logo.jpg'
+                        src='/src/assets/logos/devLogo.webp'
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
@@ -44,8 +44,8 @@ const Header = () => {
                                 <Button onClick={handleLogOut} className='me-3'>Logout</Button>
                                 :
                                 <>
-                                    <Link className='me-3 text-decoration-none text-dark' to='/login'>Login</Link>
-                                    <Link className='me-3 text-decoration-none text-dark' to='/register'>Register</Link>
+                                    <Link to='/login'><Button className='me-3'>Login</Button></Link>
+                                    <Link to='/register'><Button className='me-3'>Register</Button></Link>
                                 </>
                         }
                         {
